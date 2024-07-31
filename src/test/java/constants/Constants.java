@@ -1,5 +1,7 @@
 package constants;
 
+import java.util.Map;
+
 public class Constants {
 	public static String BASE_PATH = "https://petstore3.swagger.io/api/v3";
 	public static String PET_PATH = "/pet";
@@ -15,5 +17,6 @@ public class Constants {
 	public static String USER_LOGIN_PATH = "/user/login";
 	public static String USER_LOGOUT_PATH = "/user/logout";
 	public static String SINGLE_USER_PATH = "/user/{username}";
+	public static Map<String,String> HEADERS = Map.of("Accept", "application/vnd.github+json");
 
 }
