@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 
-public class FindByStatusTest {
+public class FindByValidStatusTest {
 
     private static Response response;
     private static List<Pet> pets;
