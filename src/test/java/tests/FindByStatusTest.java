@@ -1,6 +1,5 @@
 package tests;
 
-import constants.Constants;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.hamcrest.MatcherAssert;
@@ -8,25 +7,23 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojos.Pet;
+import utils.PetUtils;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class FindByStatusTest {
 
     private static Response response;
     private static List<Pet> pets;
-    private static final String BASE_URL = Constants.BASE_PATH + Constants.PET_FIND_BY_STATUS_PATH;
 
     @BeforeAll
     public static void beforeAll() {
-        response = RestAssured.given()
-                .queryParam("status", "pending")
+        response = RestAssured.given(PetUtils.findByStatusRequestSpec("pending"))
                 .when()
-                .get(BASE_URL)
+                .get()
                 .thenReturn();
         pets = Arrays.asList(response.getBody().as(Pet[].class));
     }
