@@ -30,6 +30,11 @@ public class FindByStatusStepdefs {
         requestSpecification = RestAssured.given(PetUtils.findByStatusRequestSpec(status));
     }
 
+    @Given("I have prepared a URL without a status parameter")
+    public void iHavePreparedAURLWithoutAStatusParameter() {
+        requestSpecification = RestAssured.given(PetUtils.findByStatusNoQueryParamRequestSpec());
+    }
+
     @When("I perform a GET request")
     public void iPerformAGETRequest() {
         response = requestSpecification.when()
@@ -60,5 +65,11 @@ public class FindByStatusStepdefs {
     @And("The response body contains the error message {string}")
     public void theResponseBodyContainsTheErrorMessage(String expectedErrorMessage) {
         MatcherAssert.assertThat(response.jsonPath().getString("message"), containsString(expectedErrorMessage));
+    }
+
+    @And("The response body contains the message {string}")
+    public void theResponseBodyContainsTheMessage(String expectedMessage) {
+        String body = response.asString();
+        MatcherAssert.assertThat(body, is(expectedMessage));
     }
 }

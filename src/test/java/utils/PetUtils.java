@@ -13,4 +13,11 @@ public class PetUtils {
                 .addQueryParam("status", status)
                 .build();
     }
+
+    public static RequestSpecification findByStatusNoQueryParamRequestSpec() {
+        return new RequestSpecBuilder()
+                .setBaseUri(Constants.BASE_PATH)
+                .setBasePath(Constants.PET_FIND_BY_STATUS_PATH)
+                .build();
+    }
 }

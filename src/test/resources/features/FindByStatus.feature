@@ -23,3 +23,9 @@ Feature: Find pets by status
         | status |
         | |
         | invalid |
+
+    Scenario: Find pets by status without providing a status parameter
+      Given I have prepared a URL without a status parameter
+      When I perform a GET request
+      Then A 400 status code is returned
+      And The response body contains the message "No status provided. Try again?"
