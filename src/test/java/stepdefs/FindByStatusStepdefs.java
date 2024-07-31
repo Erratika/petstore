@@ -11,6 +11,7 @@ import org.hamcrest.MatcherAssert;
 import pojos.Pet;
 import utils.PetUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,11 @@ public class FindByStatusStepdefs {
         response = requestSpecification.when()
                 .get()
                 .thenReturn();
-        pets = Arrays.asList(response.getBody().as(Pet[].class));
+        try {
+            pets = Arrays.asList(response.getBody().as(Pet[].class));
+        } catch (Exception e) {
+            pets = new ArrayList<>();
+        }
     }
 
     @Then("A {int} status code is returned")
@@ -50,5 +55,10 @@ public class FindByStatusStepdefs {
     @And("The returned pets have the requested status")
     public void theReturnedPetsHaveTheRequestedStatus() {
         MatcherAssert.assertThat(pets.getFirst().getStatus(), is(providedStatus));
+    }
+
+    @And("The response body contains the error message {string}")
+    public void theResponseBodyContainsTheErrorMessage(String expectedErrorMessage) {
+        MatcherAssert.assertThat(response.jsonPath().getString("message"), containsString(expectedErrorMessage));
     }
 }
