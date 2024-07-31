@@ -40,11 +40,11 @@ public class FindByStatusStepdefs {
         response = requestSpecification.when()
                 .get()
                 .thenReturn();
-        try {
-            pets = Arrays.asList(response.getBody().as(Pet[].class));
-        } catch (Exception e) {
-            pets = new ArrayList<>();
-        }
+    }
+
+    @And("I retrieve the pet data from the response body")
+    public void iRetrieveThePetDataFromTheResponseBody() {
+        pets = Arrays.asList(response.getBody().as(Pet[].class));
     }
 
     @Then("A {int} status code is returned")

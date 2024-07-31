@@ -5,6 +5,7 @@ Feature: Find pets by status
   Scenario Outline: Find pets by valid status
     Given I have prepared a URL with "<status>"
     When I perform a GET request
+    And I retrieve the pet data from the response body
     Then A 200 status code is returned
     And The response body contains more than one pet
     And The returned pets have the requested status
