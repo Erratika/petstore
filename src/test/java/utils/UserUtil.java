@@ -19,7 +19,7 @@ public class UserUtil {
 		return new RequestSpecBuilder().setBaseUri(BASE_PATH).setBasePath(USER_PATH).addHeaders(HEADERS).setContentType(ContentType.JSON).setBody(users).build();
 	}
 	public static RequestSpecification getUser(String username){
-		return new RequestSpecBuilder().setBaseUri(BASE_PATH).setBasePath(SINGLE_USER_PATH).addHeaders(HEADERS).build();
+		return new RequestSpecBuilder().setBaseUri(BASE_PATH).setBasePath(SINGLE_USER_PATH).addHeaders(HEADERS).addPathParams(Map.of("username",username)).build();
 	}
 
 	public static RequestSpecification updateUser(User user) {
