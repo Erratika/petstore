@@ -8,6 +8,7 @@ A project to test functionality of the [pet store API](https://petstore3.swagger
 
 * Java 21
 * Intellij is the recommended IDE for this project with the plugins Cucumber for Java and Gherkin
+* Maven
 
 ### Installation
 
@@ -15,7 +16,7 @@ Clone the repository and open in your preferred IDE. Install the dependencies fr
 
 ## Usage
 
-Go to `src/test/java/resources/features` and run the feature files.
+Tests can be run within an IDE by running the Cucumber runner class in `src/test/java/tests`. Alternatively, they can be run by executing `mvn clean test` in the command line. Either way, running the tests will generate JSON- and HTML-formatted reports in the `target` directory.
 
 ## Defects
 
@@ -29,4 +30,6 @@ A summary of defects identified while working with the API.
 ## Contributors
 
 * Marc Murray
+  * Testing of the user endpoints
 * Alastair Smith
+  * Testing the pets endpoints
