@@ -2,11 +2,8 @@ package stepdefs;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.hamcrest.MatcherAssert;
 import pojos.Pet;
 import utils.PetUtils;
@@ -17,39 +14,32 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 
-public class FindByStatusStepdefs {
+public class FindByStatusStepdefs extends AbstractAPI {
 
-    private Response response;
     private List<Pet> pets;
-    private RequestSpecification requestSpecification;
     private String providedStatus;
 
     @Given("I have prepared a URL with {string}")
     public void iHavePreparedAURLWith(String status) {
         providedStatus = status;
-        requestSpecification = RestAssured.given(PetUtils.findByStatusRequestSpec(status));
+        setRequestSpecification(RestAssured.given(PetUtils.findByStatusRequestSpec(status)));
     }
 
     @Given("I have prepared a URL without a status parameter")
     public void iHavePreparedAURLWithoutAStatusParameter() {
-        requestSpecification = RestAssured.given(PetUtils.findByStatusNoQueryParamRequestSpec());
+        setRequestSpecification(RestAssured.given(PetUtils.findByStatusNoQueryParamRequestSpec()));
     }
 
     @When("I perform a GET request")
     public void iPerformAGETRequest() {
-        response = requestSpecification.when()
+        setResponse(getRequestSpecification().when()
                 .get()
-                .thenReturn();
+                .thenReturn());
     }
 
     @And("I retrieve the pet data from the response body")
     public void iRetrieveThePetDataFromTheResponseBody() {
-        pets = Arrays.asList(response.getBody().as(Pet[].class));
-    }
-
-    @Then("A {int} status code is returned")
-    public void aStatusCodeIsReturned(int expectedStatusCode) {
-        MatcherAssert.assertThat(response.statusCode(), is(expectedStatusCode));
+        pets = Arrays.asList(getResponse().getBody().as(Pet[].class));
     }
 
     @And("The response body contains more than one pet")
@@ -64,12 +54,12 @@ public class FindByStatusStepdefs {
 
     @And("The response body contains the error message {string}")
     public void theResponseBodyContainsTheErrorMessage(String expectedErrorMessage) {
-        MatcherAssert.assertThat(response.jsonPath().getString("message"), containsString(expectedErrorMessage));
+        MatcherAssert.assertThat(getResponse().jsonPath().getString("message"), containsString(expectedErrorMessage));
     }
 
     @And("The response body contains the message {string}")
     public void theResponseBodyContainsTheMessage(String expectedMessage) {
-        String body = response.asString();
+        String body = getResponse().asString();
         MatcherAssert.assertThat(body, is(expectedMessage));
     }
 }
