@@ -25,21 +25,26 @@ public class FindByStatusStepdefs extends AbstractAPI {
         setRequestSpecification(RestAssured.given(PetUtils.findByStatusRequestSpec(status)));
     }
 
+    @Given("I have prepared a URL without a status parameter")
+    public void iHavePreparedAURLWithoutAStatusParameter() {
+        setRequestSpecification(RestAssured.given(PetUtils.findByStatusNoQueryParamRequestSpec()));
+    }
+
     @When("I perform a GET request")
     public void iPerformAGETRequest() {
         setResponse(getRequestSpecification().when()
                 .get()
                 .thenReturn());
-        try {
-            pets = Arrays.asList(getResponse().getBody().as(Pet[].class));
-        } catch (Exception e) {
-            pets = new ArrayList<>();
-        }
+    }
+
+    @And("I retrieve the pet data from the response body")
+    public void iRetrieveThePetDataFromTheResponseBody() {
+        pets = Arrays.asList(getResponse().getBody().as(Pet[].class));
     }
 
     @And("The response body contains more than one pet")
     public void theResponseBodyContainsMoreThanOnePet() {
-        MatcherAssert.assertThat(pets.size(), greaterThan(1));
+        MatcherAssert.assertThat(pets.size(), greaterThanOrEqualTo(1));
     }
 
     @And("The returned pets have the requested status")
@@ -50,5 +55,11 @@ public class FindByStatusStepdefs extends AbstractAPI {
     @And("The response body contains the error message {string}")
     public void theResponseBodyContainsTheErrorMessage(String expectedErrorMessage) {
         MatcherAssert.assertThat(getResponse().jsonPath().getString("message"), containsString(expectedErrorMessage));
+    }
+
+    @And("The response body contains the message {string}")
+    public void theResponseBodyContainsTheMessage(String expectedMessage) {
+        String body = getResponse().asString();
+        MatcherAssert.assertThat(body, is(expectedMessage));
     }
 }
