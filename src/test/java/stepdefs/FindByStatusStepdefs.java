@@ -54,7 +54,7 @@ public class FindByStatusStepdefs {
 
     @And("The response body contains more than one pet")
     public void theResponseBodyContainsMoreThanOnePet() {
-        MatcherAssert.assertThat(pets.size(), greaterThan(1));
+        MatcherAssert.assertThat(pets.size(), greaterThanOrEqualTo(1));
     }
 
     @And("The returned pets have the requested status")

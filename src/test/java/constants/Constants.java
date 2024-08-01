@@ -1,7 +1,8 @@
 package constants;
 
 public class Constants {
-	public static String BASE_PATH = "https://petstore3.swagger.io/api/v3";
+//	public static String BASE_PATH = "https://petstore3.swagger.io/api/v3";
+	public static String BASE_PATH = "http://localhost:8080/api/v3";
 	public static String PET_PATH = "/pet";
 	public static String SINGLE_PET_PATH = "/pet/{petId}";
 	public static String PET_FIND_BY_STATUS_PATH = "/pet/findByStatus";
