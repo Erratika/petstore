@@ -18,6 +18,6 @@ public class Constants {
 	public static String USER_LOGIN_PATH = "/user/login";
 	public static String USER_LOGOUT_PATH = "/user/logout";
 	public static String SINGLE_USER_PATH = "/user/{username}";
-	public static Map<String,String> HEADERS = Map.of("Accept", "application/vnd.github+json");
+	public static Map<String,String> HEADERS = Map.of("Accept", "application/json");
 
 }

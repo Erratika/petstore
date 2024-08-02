@@ -15,4 +15,9 @@ public class GenericAPIStepdefs extends AbstractAPI {
 	public void iPerformAPOSTRequest() {
 		setResponse(getRequestSpecification().post().thenReturn());
 	}
+
+	@When("I perform a GET request")
+	public void iPerformGETRequest() {
+		setResponse(getRequestSpecification().get().thenReturn());
+	}
 }

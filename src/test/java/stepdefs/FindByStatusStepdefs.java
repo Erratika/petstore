@@ -2,13 +2,11 @@ package stepdefs;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import org.hamcrest.MatcherAssert;
 import pojos.Pet;
 import utils.PetUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,12 +28,6 @@ public class FindByStatusStepdefs extends AbstractAPI {
         setRequestSpecification(RestAssured.given(PetUtils.findByStatusNoQueryParamRequestSpec()));
     }
 
-    @When("I perform a GET request")
-    public void iPerformAGETRequest() {
-        setResponse(getRequestSpecification().when()
-                .get()
-                .thenReturn());
-    }
 
     @And("I retrieve the pet data from the response body")
     public void iRetrieveThePetDataFromTheResponseBody() {
