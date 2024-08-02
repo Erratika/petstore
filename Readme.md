@@ -21,8 +21,7 @@ Tests can be run within an IDE by running the Cucumber runner class in `src/test
 run by executing `mvn clean test` in the command line. Either way, running the tests will generate JSON- and
 HTML-formatted reports in the `target` directory.
 
-## Project Class Diagram 
-![](https://i.vgy.me/UEp6Fj.png)
+
 ## Tested Endpoints
 - Pet
   - POST /pet/{petId}
