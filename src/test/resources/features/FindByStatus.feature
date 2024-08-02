@@ -5,6 +5,7 @@ Feature: Find pets by status
   Scenario Outline: Find pets by valid status
     Given I have prepared a URL with "<status>"
     When I perform a GET request
+    And I retrieve the pet data from the response body
     Then A 200 status code is returned
     And The response body contains more than one pet
     And The returned pets have the requested status
@@ -23,3 +24,9 @@ Feature: Find pets by status
         | status |
         | |
         | invalid |
+
+    Scenario: Find pets by status without providing a status parameter
+      Given I have prepared a URL without a status parameter
+      When I perform a GET request
+      Then A 400 status code is returned
+      And The response body contains the message "No status provided. Try again?"
