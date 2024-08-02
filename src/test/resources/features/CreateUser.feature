@@ -4,17 +4,52 @@ Feature: Create user on API
 
   Scenario: Create valid user
     Given I have prepared a request with the following user details
-      | id    | username  | email              | password | firstName | lastName | phoneNumber |
-      | 33452 | example38 | test@example38.com | password | Test      | Example  | 04823748928 |
+      | id          | 1              |
+      | username    | example1          |
+      | email       | test1@example38.com |
+      | password    | password           |
+      | firstName   | Test               |
+      | lastName    | Example            |
+      | phoneNumber | 04823748928        |
+      | userStatus  | 1                  |
     When I perform a POST request
-    Then A 200 status code is returned
-   #Expand with more tests
+    Then A 201 status code is returned
 
   Scenario: Create user with existing id
     Given I have prepared a request with the following user details
-      | id    | username  | email              | password | firstName | lastName | phoneNumber |
-      | 33452 | example38 | test@example38.com | password | Test      | Example  | 04823748928 |
+      | id          | 1              |
+      | username    | example2          |
+      | email       | test2@example38.com |
+      | password    | password           |
+      | firstName   | Test               |
+      | lastName    | Example            |
+      | phoneNumber | 04823748928        |
+      | userStatus  | 1                  |
     When I perform a POST request
     Then A 409 status code is returned
 
-    # Enter steps here
+  Scenario: Create user with existing username
+    Given I have prepared a request with the following user details
+      | id          | 2              |
+      | username    | example1          |
+      | email       | test3@example.com |
+      | password    | password           |
+      | firstName   | Test               |
+      | lastName    | Example            |
+      | phoneNumber | 04823748928        |
+      | userStatus  | 1                  |
+    When I perform a POST request
+    Then A 409 status code is returned
+
+  Scenario: Create user with existing username
+    Given I have prepared a request with the following user details
+      | id          | 3              |
+      | username    | example3          |
+      | email       | test1@example.com |
+      | password    | password           |
+      | firstName   | Test               |
+      | lastName    | Example            |
+      | phoneNumber | 04823748928        |
+      | userStatus  | 1                  |
+    When I perform a POST request
+    Then A 409 status code is returned

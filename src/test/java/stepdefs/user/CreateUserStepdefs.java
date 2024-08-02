@@ -1,10 +1,10 @@
-package stepdefs;
+package stepdefs.user;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import pojos.User;
+import stepdefs.AbstractAPI;
 import utils.UserUtil;
 
 import java.util.Map;
@@ -23,6 +23,7 @@ public class CreateUserStepdefs extends AbstractAPI {
 		sentUser.setLastName(userDetails.get("lastName"));
 		sentUser.setId(Integer.parseInt(userDetails.get("id")));
 		sentUser.setPhone(userDetails.get("phoneNumber"));
+		sentUser.setUserStatus(Integer.parseInt(userDetails.get("userStatus")));
 		setRequestSpecification(RestAssured
 				.given(UserUtil.createUser(sentUser)).body(sentUser));
 
